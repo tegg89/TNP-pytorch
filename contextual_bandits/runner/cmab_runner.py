@@ -13,7 +13,9 @@ from data.wheel import sample_wheel_data, WheelBanditSampler
 from utils.misc import load_module
 from utils.log import get_logger, RunningAverage, plot_log
 from runner import evalsets_path, results_path, datasets_path
-
+import wandb
+WANDB_PROJECT = 'np'
+WANDB_ENTITY = 'sai'
 
 def cmab(args):
     args.expconfig = args.expid or "default"
@@ -23,6 +25,7 @@ def cmab(args):
     if args.cmab_mode == 'train':
         name = args.model
         model_cls = getattr(load_module(f'models/{name}.py'), name.upper())  # ex. from models.cnp import CNP
+        wandb.init(project=WANDB_PROJECT, entity=WANDB_ENTITY, name=f"bandit_{model_cls}")
         with open(osp.join("configs", f"{args.cmab_data}", f"{name}.yaml")) as g:
             config = yaml.safe_load(g)
         if args.pretrain:
@@ -256,6 +259,12 @@ def train(args, model):
             logger.info(line)
             ravg.reset()
 
+            rewards, regrets = ret_stats(args, models)
+            wandb.log({
+                'train/rewards': rewards,
+                'train/regrets': regrets,
+            })
+
         if step % args.save_freq == 0 or step == args.num_epochs:
             ckpt = AttrDict()
             ckpt.model = model.state_dict()
@@ -297,6 +306,24 @@ def eval(args, models):
     results = [[model.name for model in models], h_actions, h_rewards, opt_actions, opt_rewards, freq, duration]
 
     np.save(osp.join(path, filename), results, allow_pickle=True)
+
+
+def ret_stats(args, models):
+    torch.manual_seed(0)
+    torch.cuda.manual_seed(0)
+    np.random.seed(0)
+
+    _dataset = get_bandit_dataset(args)
+    dataset, opt_rewards, opt_actions, num_actions, context_dim = _dataset
+
+    _results = run_contextual_bandit(context_dim, num_actions, dataset, models, args.cmab_num_bs, args.device)
+    _, h_rewards = _results
+
+    _rewards = r[:, 0]
+    _regrets = opt_rewards - r[:, 0]
+    print(f'rewards: {rewards} | regrets: {regrets}')
+    
+    return _rewards, _regrets
 
 
 def plot(args, names):
