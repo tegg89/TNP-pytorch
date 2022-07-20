@@ -3,3 +3,6 @@
 *results*
 *evalsets*
 *datasets*
+contextual_bandits/wandb
+bayesian_optimization/wandb
+regression/wandb
