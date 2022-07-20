@@ -1,0 +1,17 @@
+check 20220719-1752
+Experiment: Bandit Train | None
+Device: cpu
+
+Total number of parameters: 15530
+
+[model] TNPA-S0-B8 [step] 200 [lr] 5.000e-04 [train_loss] loss 79.9072 (27.841 secs)
+Traceback (most recent call last):
+  File "main.py", line 8, in <module>
+    main()
+  File "main.py", line 5, in main
+    cmab(args)
+  File "/Users/teggsung/Codes/NP/TNP-pytorch/contextual_bandits/runner/cmab_runner.py", line 47, in cmab
+    train(args, model)
+  File "/Users/teggsung/Codes/NP/TNP-pytorch/contextual_bandits/runner/cmab_runner.py", line 276, in train
+  File "/Users/teggsung/Codes/NP/TNP-pytorch/contextual_bandits/runner/cmab_runner.py", line 343, in eval
+ValueError: not enough values to unpack (expected 5, got 1)

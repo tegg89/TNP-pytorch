@@ -1,0 +1,16 @@
+Experiment: Bandit Train | None
+Device: cpu
+
+Total number of parameters: 15530
+
+[model] TNPA-S0-B8 [step] 200 [lr] 5.000e-04 [train_loss] loss 117.6921 (27.704 secs)
+Traceback (most recent call last):
+  File "main.py", line 8, in <module>
+    main()
+  File "main.py", line 5, in main
+    cmab(args)
+  File "/Users/teggsung/Codes/NP/TNP-pytorch/contextual_bandits/runner/cmab_runner.py", line 46, in cmab
+    train(args, model)
+  File "/Users/teggsung/Codes/NP/TNP-pytorch/contextual_bandits/runner/cmab_runner.py", line 262, in train
+    rewards, regrets = ret_stats(args, models)
+NameError: name 'models' is not defined

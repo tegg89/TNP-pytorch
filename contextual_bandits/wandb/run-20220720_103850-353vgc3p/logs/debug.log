@@ -1,0 +1,26 @@
+2022-07-20 10:38:50,569 INFO    MainThread:38402 [wandb_init.py:_log_setup():307] Logging user logs to wandb/run-20220720_103850-353vgc3p/logs/debug.log
+2022-07-20 10:38:50,569 INFO    MainThread:38402 [wandb_init.py:_log_setup():308] Logging internal logs to wandb/run-20220720_103850-353vgc3p/logs/debug-internal.log
+2022-07-20 10:38:50,569 INFO    MainThread:38402 [wandb_setup.py:_flush():68] setting env: {}
+2022-07-20 10:38:50,569 INFO    MainThread:38402 [wandb_setup.py:_flush():68] multiprocessing start_methods=fork,spawn,forkserver
+2022-07-20 10:38:50,569 WARNING MainThread:38402 [wandb_setup.py:_flush():68] Ignoring settings passed to wandb.setup() which has already been configured.
+2022-07-20 10:38:50,592 WARNING MainThread:38402 [wandb_setup.py:__init__():214] Ignoring settings passed to wandb.setup() which has already been configured.
+2022-07-20 10:38:51,299 WARNING MainThread:38402 [wandb_init.py:init():496] interrupted
+Traceback (most recent call last):
+  File "/Users/teggsung/anaconda3/envs/pytorch_py37/lib/python3.7/site-packages/wandb/sdk/wandb_init.py", line 479, in init
+    run = wi.init()
+  File "/Users/teggsung/anaconda3/envs/pytorch_py37/lib/python3.7/site-packages/wandb/sdk/wandb_init.py", line 358, in init
+    _backend=backend, _disable_warning=True, _settings=self.settings
+  File "/Users/teggsung/anaconda3/envs/pytorch_py37/lib/python3.7/site-packages/wandb/sdk/wandb_login.py", line 95, in _login
+    res = _backend.interface.communicate_login(key, anonymous)
+  File "/Users/teggsung/anaconda3/envs/pytorch_py37/lib/python3.7/site-packages/wandb/interface/interface.py", line 434, in communicate_login
+    result = self._communicate(rec, timeout=timeout)
+  File "/Users/teggsung/anaconda3/envs/pytorch_py37/lib/python3.7/site-packages/wandb/interface/interface.py", line 429, in _communicate
+    return future.get(timeout)
+  File "/Users/teggsung/anaconda3/envs/pytorch_py37/lib/python3.7/site-packages/wandb/interface/interface.py", line 58, in get
+    is_set = self._object_ready.wait(timeout)
+  File "/Users/teggsung/anaconda3/envs/pytorch_py37/lib/python3.7/threading.py", line 552, in wait
+    signaled = self._cond.wait(timeout)
+  File "/Users/teggsung/anaconda3/envs/pytorch_py37/lib/python3.7/threading.py", line 300, in wait
+    gotit = waiter.acquire(True, timeout)
+KeyboardInterrupt
+2022-07-20 10:38:51,303 INFO    MainThread:38402 [internal.py:handle_exit():137] Internal process exited

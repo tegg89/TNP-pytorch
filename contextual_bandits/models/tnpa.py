@@ -78,7 +78,7 @@ class TNPA(TNP):
         batch.xc = xc
         batch.yc = yc
         batch.xt = xt
-        batch.yt = torch.zeros((xt.shape[0], xt.shape[1], yc.shape[2]), device='cuda')
+        batch.yt = torch.zeros((xt.shape[0], xt.shape[1], yc.shape[2]), device=self.device)
 
         num_context = xc.shape[1]
 

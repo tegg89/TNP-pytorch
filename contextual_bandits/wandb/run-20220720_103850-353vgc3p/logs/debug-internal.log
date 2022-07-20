@@ -1,0 +1,13 @@
+2022-07-20 10:38:51,295 INFO    MainThread:38413 [internal.py:wandb_internal():62] W&B internal server running at pid: 38413
+2022-07-20 10:38:51,296 DEBUG   HandlerThread:38413 [handler.py:handle():47] handle: request
+2022-07-20 10:38:51,296 DEBUG   HandlerThread:38413 [handler.py:handle_request():56] handle_request: login
+2022-07-20 10:38:51,296 DEBUG   SenderThread:38413 [sender.py:send():89] send: request
+2022-07-20 10:38:51,299 WARNING MainThread:38413 [internal.py:wandb_internal():116] Internal process interrupt: 1
+2022-07-20 10:38:51,301 DEBUG   SenderThread:38413 [connectionpool.py:_new_conn():943] Starting new HTTPS connection (1): api.wandb.ai:443
+2022-07-20 10:38:51,529 DEBUG   SenderThread:38413 [connectionpool.py:_make_request():442] https://api.wandb.ai:443 "POST /graphql HTTP/1.1" 200 None
+2022-07-20 10:38:51,536 INFO    SenderThread:38413 [sender.py:send_request_login():135] Login server info: {'cliVersionInfo': {'min_cli_version': '0.8.20', 'max_cli_version': '0.12.16'}}
+2022-07-20 10:40:54,860 WARNING MainThread:38413 [internal.py:wandb_internal():116] Internal process interrupt: 2
+2022-07-20 10:40:54,861 ERROR   MainThread:38413 [internal.py:wandb_internal():119] Internal process interrupted.
+2022-07-20 10:40:54,977 INFO    SenderThread:38413 [sender.py:finish():536] shutting down sender
+2022-07-20 10:40:55,738 INFO    HandlerThread:38413 [handler.py:finish():274] shutting down handler
+2022-07-20 10:40:55,790 INFO    MainThread:38413 [internal.py:handle_exit():137] Internal process exited

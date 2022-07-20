@@ -25,6 +25,9 @@ class TNP(nn.Module):
         encoder_layer = nn.TransformerEncoderLayer(d_model, nhead, dim_feedforward, dropout, batch_first=True)
         self.encoder = nn.TransformerEncoder(encoder_layer, num_layers)
 
+    def set_device(self, device):
+        self.device = device
+
     def drop(self, y):
         y_dropped = torch.randn_like(y)
         not_drop_ids = torch.rand_like(y) > self.drop_y
@@ -50,10 +53,10 @@ class TNP(nn.Module):
         num_tar = batch.xt.shape[1]
         num_all = num_ctx + num_tar
         if not autoreg:
-            mask = torch.zeros(num_all, num_all, device='cuda')
+            mask = torch.zeros(num_all, num_all, device=self.device)
             mask[:, num_ctx:] = float('-inf')
         else:
-            mask = torch.zeros((num_all+num_tar, num_all+num_tar), device='cuda').fill_(float('-inf'))
+            mask = torch.zeros((num_all+num_tar, num_all+num_tar), device=self.device).fill_(float('-inf'))
             mask[:, :num_ctx] = 0.0 # all points attend to context points
             mask[num_ctx:num_all, num_ctx:num_all].triu_(diagonal=1) # each real target point attends to itself and precedding real target points
             mask[num_all:, num_ctx:num_all].triu_(diagonal=0) # each fake target point attends to preceeding real target points
@@ -73,7 +76,7 @@ class TNP(nn.Module):
     def create_mask_pretrain(self, batch):
         num_points = batch.x.shape[1]
 
-        mask = torch.zeros((2*num_points-1, 2*num_points-1), device='cuda').fill_(float('-inf'))
+        mask = torch.zeros((2*num_points-1, 2*num_points-1), device=self.device).fill_(float('-inf'))
         mask[:num_points, :num_points].triu_(diagonal=1)
         mask[num_points:, 1:num_points].triu_(diagonal=0)
         mask[num_points:, 0] = 0.0

@@ -1,0 +1,21 @@
+{
+    "os": "Darwin-20.6.0-x86_64-i386-64bit",
+    "python": "3.7.9",
+    "heartbeatAt": "2022-07-19T08:51:58.605866",
+    "startedAt": "2022-07-19T08:51:57.276134",
+    "docker": null,
+    "cpu_count": 8,
+    "cuda": null,
+    "args": [],
+    "state": "running",
+    "program": "<python with no main file>",
+    "git": {
+        "remote": "https://github.com/tegg89/TNP-pytorch",
+        "commit": "644928bceb605003c49f20c4bd3be397f34bd84e"
+    },
+    "email": "tegg89@gmail.com",
+    "root": "/Users/teggsung/Codes/NP/TNP-pytorch",
+    "host": "Teggui-MacBookAir.local",
+    "username": "teggsung",
+    "executable": "/Users/teggsung/anaconda3/envs/pytorch_py37/bin/python"
+}

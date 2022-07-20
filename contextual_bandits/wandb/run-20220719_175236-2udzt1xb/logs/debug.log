@@ -1,0 +1,62 @@
+2022-07-19 17:52:36,280 INFO    MainThread:35168 [wandb_init.py:_log_setup():307] Logging user logs to wandb/run-20220719_175236-2udzt1xb/logs/debug.log
+2022-07-19 17:52:36,280 INFO    MainThread:35168 [wandb_init.py:_log_setup():308] Logging internal logs to wandb/run-20220719_175236-2udzt1xb/logs/debug-internal.log
+2022-07-19 17:52:36,280 INFO    MainThread:35168 [wandb_setup.py:_flush():68] setting env: {}
+2022-07-19 17:52:36,280 INFO    MainThread:35168 [wandb_setup.py:_flush():68] multiprocessing start_methods=fork,spawn,forkserver
+2022-07-19 17:52:36,280 WARNING MainThread:35168 [wandb_setup.py:_flush():68] Ignoring settings passed to wandb.setup() which has already been configured.
+2022-07-19 17:52:36,306 WARNING MainThread:35168 [wandb_setup.py:__init__():214] Ignoring settings passed to wandb.setup() which has already been configured.
+2022-07-19 17:52:37,747 INFO    MainThread:35168 [wandb_run.py:_console_start():1103] atexit reg
+2022-07-19 17:52:37,748 INFO    MainThread:35168 [wandb_run.py:_redirect():978] redirect: SettingsConsole.REDIRECT
+2022-07-19 17:52:37,748 INFO    MainThread:35168 [wandb_run.py:_redirect():981] Redirecting console.
+2022-07-19 17:52:37,748 INFO    MainThread:35168 [redirect.py:install():187] install start
+2022-07-19 17:52:37,748 INFO    MainThread:35168 [redirect.py:install():202] install stop
+2022-07-19 17:52:37,748 INFO    MainThread:35168 [redirect.py:install():187] install start
+2022-07-19 17:52:37,748 INFO    MainThread:35168 [redirect.py:install():202] install stop
+2022-07-19 17:52:37,748 INFO    MainThread:35168 [wandb_run.py:_redirect():1025] Redirects installed.
+2022-07-19 17:52:37,766 INFO    MainThread:35168 [wandb_run.py:_atexit_cleanup():1081] got exitcode: 1
+2022-07-19 17:52:37,767 INFO    MainThread:35168 [wandb_run.py:_restore():1053] restore
+2022-07-19 17:52:37,767 INFO    MainThread:35168 [redirect.py:uninstall():206] uninstall start
+2022-07-19 17:52:37,767 INFO    MainThread:35168 [redirect.py:_stop():255] _stop: stdout
+2022-07-19 17:52:37,767 INFO    stdout    :35168 [redirect.py:_pipe_relay():113] relay done saw last write: stdout
+2022-07-19 17:52:37,767 INFO    MainThread:35168 [redirect.py:_stop():261] _stop closed: stdout
+2022-07-19 17:52:37,767 INFO    stdout    :35168 [redirect.py:_pipe_relay():129] relay done done: stdout
+2022-07-19 17:52:37,767 INFO    MainThread:35168 [redirect.py:_stop():267] _stop joined: stdout
+2022-07-19 17:52:37,767 INFO    MainThread:35168 [redirect.py:_stop():269] _stop rd closed: stdout
+2022-07-19 17:52:37,767 INFO    MainThread:35168 [redirect.py:uninstall():210] uninstall done
+2022-07-19 17:52:37,768 INFO    MainThread:35168 [redirect.py:uninstall():206] uninstall start
+2022-07-19 17:52:37,768 INFO    MainThread:35168 [redirect.py:_stop():255] _stop: stderr
+2022-07-19 17:52:37,768 INFO    MainThread:35168 [redirect.py:_stop():261] _stop closed: stderr
+2022-07-19 17:52:37,768 INFO    stderr    :35168 [redirect.py:_pipe_relay():113] relay done saw last write: stderr
+2022-07-19 17:52:37,768 INFO    stderr    :35168 [redirect.py:_pipe_relay():129] relay done done: stderr
+2022-07-19 17:52:37,768 INFO    MainThread:35168 [redirect.py:_stop():267] _stop joined: stderr
+2022-07-19 17:52:37,768 INFO    MainThread:35168 [redirect.py:_stop():269] _stop rd closed: stderr
+2022-07-19 17:52:37,768 INFO    MainThread:35168 [redirect.py:uninstall():210] uninstall done
+2022-07-19 17:52:37,981 INFO    MainThread:35168 [wandb_run.py:_wait_for_finish():1185] got exit ret: uuid: "96c514a4378a4bfda75445dc329d598c"
+response {
+  poll_exit_response {
+    file_counts {
+      wandb_count: 1
+    }
+    pusher_stats {
+      total_bytes: 678
+    }
+  }
+}
+
+2022-07-19 17:52:39,992 INFO    MainThread:35168 [wandb_run.py:_wait_for_finish():1185] got exit ret: uuid: "bfafc960b02a4c0ab942ace61ad228f0"
+response {
+  poll_exit_response {
+    done: true
+    exit_result {
+    }
+    file_counts {
+      wandb_count: 5
+    }
+    pusher_stats {
+      uploaded_bytes: 7613
+      total_bytes: 7613
+    }
+  }
+}
+
+2022-07-19 17:52:41,113 INFO    MainThread:35168 [wandb_run.py:_show_files():1332] logging synced files
+2022-07-19 17:52:41,114 INFO    MainThread:35168 [internal.py:handle_exit():137] Internal process exited

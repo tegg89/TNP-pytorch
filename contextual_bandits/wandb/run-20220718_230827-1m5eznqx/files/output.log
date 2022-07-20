@@ -1,0 +1,27 @@
+Generating wheel bandit training sets...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|##########| 1/1 [00:00<00:00,  6.05it/s]100%|##########| 1/1 [00:00<00:00,  6.04it/s]
+Experiment: Bandit Train | None
+Device: cpu
+
+Total number of parameters: 15530
+
+Traceback (most recent call last):
+  File "main.py", line 8, in <module>
+    main()
+  File "main.py", line 5, in main
+    cmab(args)
+  File "/Users/teggsung/Codes/NP/TNP-pytorch/contextual_bandits/runner/cmab_runner.py", line 46, in cmab
+    train(args, model)
+  File "/Users/teggsung/Codes/NP/TNP-pytorch/contextual_bandits/runner/cmab_runner.py", line 243, in train
+    outs = model(batch)
+  File "/Users/teggsung/anaconda3/envs/pytorch_py37/lib/python3.7/site-packages/torch/nn/modules/module.py", line 1110, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "models/tnpa.py", line 48, in forward
+    out_encoder = self.encode(batch, autoreg=True, drop_ctx=True)
+  File "/Users/teggsung/Codes/NP/TNP-pytorch/contextual_bandits/models/tnp.py", line 86, in encode
+    mask = self.create_mask(batch, autoreg)
+  File "/Users/teggsung/Codes/NP/TNP-pytorch/contextual_bandits/models/tnp.py", line 56, in create_mask
+    mask = torch.zeros((num_all+num_tar, num_all+num_tar), device='cuda').fill_(float('-inf'))
+  File "/Users/teggsung/anaconda3/envs/pytorch_py37/lib/python3.7/site-packages/torch/cuda/__init__.py", line 210, in _lazy_init
+    raise AssertionError("Torch not compiled with CUDA enabled")
+AssertionError: Torch not compiled with CUDA enabled

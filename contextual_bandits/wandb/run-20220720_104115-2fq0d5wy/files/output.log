@@ -1,0 +1,35 @@
+Experiment: Bandit Train | None
+Device: cpu
+
+Total number of parameters: 15530
+
+Traceback (most recent call last):
+  File "main.py", line 8, in <module>
+    main()
+  File "main.py", line 5, in main
+    cmab(args)
+  File "/Users/teggsung/Codes/NP/TNP-pytorch/contextual_bandits/runner/cmab_runner.py", line 48, in cmab
+    train(args, model)
+  File "/Users/teggsung/Codes/NP/TNP-pytorch/contextual_bandits/runner/cmab_runner.py", line 246, in train
+    outs = model(batch)
+  File "/Users/teggsung/anaconda3/envs/pytorch_py37/lib/python3.7/site-packages/torch/nn/modules/module.py", line 1110, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "models/tnpa.py", line 48, in forward
+    out_encoder = self.encode(batch, autoreg=True, drop_ctx=True)
+  File "/Users/teggsung/Codes/NP/TNP-pytorch/contextual_bandits/models/tnp.py", line 94, in encode
+    out = self.encoder(embeddings, mask=mask)
+  File "/Users/teggsung/anaconda3/envs/pytorch_py37/lib/python3.7/site-packages/torch/nn/modules/module.py", line 1110, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/Users/teggsung/anaconda3/envs/pytorch_py37/lib/python3.7/site-packages/torch/nn/modules/transformer.py", line 202, in forward
+    output = mod(output, src_mask=mask, src_key_padding_mask=src_key_padding_mask)
+  File "/Users/teggsung/anaconda3/envs/pytorch_py37/lib/python3.7/site-packages/torch/nn/modules/module.py", line 1110, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/Users/teggsung/anaconda3/envs/pytorch_py37/lib/python3.7/site-packages/torch/nn/modules/transformer.py", line 345, in forward
+    x = self.norm2(x + self._ff_block(x))
+  File "/Users/teggsung/anaconda3/envs/pytorch_py37/lib/python3.7/site-packages/torch/nn/modules/transformer.py", line 360, in _ff_block
+    x = self.linear2(self.dropout(self.activation(self.linear1(x))))
+  File "/Users/teggsung/anaconda3/envs/pytorch_py37/lib/python3.7/site-packages/torch/nn/modules/module.py", line 1110, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/Users/teggsung/anaconda3/envs/pytorch_py37/lib/python3.7/site-packages/torch/nn/modules/linear.py", line 103, in forward
+    return F.linear(input, self.weight, self.bias)
+KeyboardInterrupt

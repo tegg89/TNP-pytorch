@@ -26,12 +26,14 @@ def cmab(args):
         name = args.model
         model_cls = getattr(load_module(f'models/{name}.py'), name.upper())  # ex. from models.cnp import CNP
         wandb.init(project=WANDB_PROJECT, entity=WANDB_ENTITY, name=f"bandit_{model_cls}")
+        args.num_contexts = 2000
         with open(osp.join("configs", f"{args.cmab_data}", f"{name}.yaml")) as g:
             config = yaml.safe_load(g)
         if args.pretrain:
             assert args.model == 'tnpa'
             config['pretrain'] = args.pretrain
         model = model_cls(**config).to(device)
+        model.set_device(args.device)
         model.train()
         path, filename = get_train_path(args)
         file = osp.join(path, filename)
@@ -98,8 +100,8 @@ def cmab(args):
         plot(args, names)
 
 
-def get_bandit_dataset(args):
-    if args.cmab_mode == "train":
+def get_bandit_dataset(args, mode):
+    if mode == "train":
         path, filename = get_trainset_path(args)
         if not osp.isfile(osp.join(path, f"{filename}.tar")):
             gen_trainset(args)
@@ -196,10 +198,11 @@ def get_plot_path(args):
 
 
 def train(args, model):
+    import time
     torch.manual_seed(args.cmab_train_seed)
     torch.cuda.manual_seed(args.cmab_train_seed)
 
-    dataset = get_bandit_dataset(args)
+    dataset = get_bandit_dataset(args, args.cmab_mode)
     optimizer = torch.optim.Adam(model.parameters(), lr=args.lr)
     scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=int(args.num_epochs / args.cmab_train_update_freq))
     device = args.device
@@ -259,11 +262,25 @@ def train(args, model):
             logger.info(line)
             ravg.reset()
 
-            rewards, regrets = ret_stats(args, models)
-            wandb.log({
-                'train/rewards': rewards,
-                'train/regrets': regrets,
-            })
+            """ EVAL """
+            args.num_contexts = 2000
+            path, filename = get_train_path(args)
+            name = args.model
+
+            for i in range(args.cmab_eval_seed_start, args.cmab_eval_seed_end + 1):
+                args.cmab_eval_seed = i
+                actor = DummyActor(model, device=args.device, method=args.cmab_eval_method)
+                path, filename = get_eval_path(args)
+                with open(osp.join(path, 'args.yaml'), 'w') as f:
+                    yaml.dump(args.__dict__, f)
+                eval(args, [actor])
+
+            # names = []
+            # with open(osp.join("configs", f"{args.cmab_data}", args.cmab_models)) as f:
+            #     f = yaml.safe_load(f)
+            #     for name in f:
+            #         names.append(name)
+            # plot(args, names)
 
         if step % args.save_freq == 0 or step == args.num_epochs:
             ckpt = AttrDict()
@@ -288,7 +305,7 @@ def eval(args, models):
     torch.cuda.manual_seed(0)
     np.random.seed(0)
 
-    _dataset = get_bandit_dataset(args)
+    _dataset = get_bandit_dataset(args, "eval")
     dataset, opt_rewards, opt_actions, num_actions, context_dim = _dataset
 
     t_init = time.time()
@@ -305,7 +322,20 @@ def eval(args, models):
     freq, duration = log_results(args, models, opt_rewards, opt_actions, h_rewards, t_init)
     results = [[model.name for model in models], h_actions, h_rewards, opt_actions, opt_rewards, freq, duration]
 
-    np.save(osp.join(path, filename), results, allow_pickle=True)
+    rewards = np.mean(h_rewards[:, 0])
+    regrets = np.mean(opt_rewards - h_rewards[:, 0])
+    print(f'rewards: {rewards} | regrets: {regrets}')
+        
+    # mu_rewards, sigma_rewards = np.mean(rewards, 0), np.std(rewards, 0)  # [N,Nm]
+    # mu_regrets, sigma_regrets = np.mean(regrets, 0), np.std(regrets, 0)  # [N,Nm]
+
+    # rewards, regrets = ret_stats(args, models)
+    wandb.log({
+        'train/rewards': rewards,
+        'train/regrets': regrets,
+    })
+
+    # np.save(osp.join(path, filename), results, allow_pickle=True)
 
 
 def ret_stats(args, models):
@@ -313,7 +343,7 @@ def ret_stats(args, models):
     torch.cuda.manual_seed(0)
     np.random.seed(0)
 
-    _dataset = get_bandit_dataset(args)
+    _dataset = get_bandit_dataset(args, 'eval')
     dataset, opt_rewards, opt_actions, num_actions, context_dim = _dataset
 
     _results = run_contextual_bandit(context_dim, num_actions, dataset, models, args.cmab_num_bs, args.device)

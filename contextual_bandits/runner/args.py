@@ -7,7 +7,7 @@ def get_args():
     # Experiment
     parser.add_argument('--expid', type=str, default=None)
     parser.add_argument('--resume', type=str, default=None)
-    parser.add_argument('--device', type=str, default='cuda') # 'cpu' to use cpu
+    parser.add_argument('--device', type=str, default='cpu') # 'cpu' to use cpu
 
     # wheel
     parser.add_argument("--cmab_data", choices=["wheel"], default="wheel")
